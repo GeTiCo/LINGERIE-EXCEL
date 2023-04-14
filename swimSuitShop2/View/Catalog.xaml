@@ -1,0 +1,180 @@
+﻿<Window x:Class="swimSuitShop2.View.Catalog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:swimSuitShop2.View"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        BorderThickness="0.3"
+        WindowStartupLocation="CenterScreen"
+        Title="Catalog" Height="600" Width="800">
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,800,600" RadiusX="10" RadiusY="10"/>
+    </Window.Clip>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <!--Шапка-->
+        <Border CornerRadius="0,0,10,10" Background="#FF007AFF" Grid.Row="0">
+        <Grid Grid.Row="0" Style="{StaticResource headerGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="/res/LogoSwim1.png" Margin="5"/>
+            <TextBlock Grid.Column="1"
+                     Text="LINGERIE"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Style="{StaticResource ETBStyle}"
+                     FontSize="40"
+                     Foreground="White"
+                     Height="72">
+            </TextBlock>
+            <Button Grid.Column="2" Style="{StaticResource Exit}" Click="Button_Click"/>
+        </Grid>
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="20" Color="blue" Opacity="0.3"/>
+        </Border.Effect>
+        </Border>
+        <!--Тело-->
+        <Grid Grid.Row="1" Style="{StaticResource mainback}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0">
+                <Grid Grid.Column="0" Background="#FFDCEDFF" >
+                <ListBox
+                    x:Name="listCategory"
+                    Grid.Row="1"
+                    Margin="10,10"
+                    SelectionChanged="listCategory_SelectionChanged"
+                    HorizontalContentAlignment="Center"
+                    FontSize="18"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    VirtualizingPanel.ScrollUnit="Pixel"
+                    BorderBrush="#FF007AFF"
+                    FontFamily="Sylfaen"
+                         Padding="0,15"
+                    ItemContainerStyle="{StaticResource listStyle}">
+                    <ListBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </Grid>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Color="blue" Opacity="0.3"/>
+            </Border.Effect>
+            </Border>
+            <ListBox Grid.Column="1"
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                         Name="listViewProducts"
+                         Margin="20,10"
+                         ItemContainerStyle ="{StaticResource listProdStyle}"
+                         VirtualizingPanel.ScrollUnit="Pixel"
+                         BorderBrush="#FF007AFF">
+                <ListBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Focusable" Value="False" />
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image
+                                    Name="PhotoItem"
+                                    Source="{Binding Path=Photo}"
+                                    Width="100"
+                                    Height="100"/>
+                            <StackPanel
+                                    VerticalAlignment="Center"
+                                    Orientation="Vertical"
+                                    Margin="0,0,20,0"
+                                    Width="385">
+                                <TextBlock
+                                        FontSize="15"
+                                        FontFamily="Sylfaen"
+                                        TextWrapping="Wrap"
+                                        Text="{Binding   Path=Name,   StringFormat= Наименование: {0}}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="15"
+                                        FontFamily="Sylfaen"
+                                        Text="{Binding   Path=Cost,   StringFormat= Цена: {0}}"/>
+                                    <TextBlock
+                                        FontSize="15"
+                                            Margin="25,0,0,0"
+                                            Foreground="#FF007AFF"
+                                        FontFamily="Sylfaen"
+                                        Text="{Binding   Path=Uid,   StringFormat= UID: {0}}"/>
+                                    <TextBlock
+                                        FontSize="15"
+                                        Margin="25,0,0,0"
+                                        FontFamily="Sylfaen"
+                                        Text="{Binding   Path=Size,   StringFormat= Размеры: {0}}"/>
+                                </StackPanel>
+                                <TextBlock
+                                        FontSize="15"
+                                    Foreground="#FF717171"
+                                        FontFamily="Sylfaen"
+                                        Text="{Binding   Path=Material,   StringFormat= Состав: {0}}"/>
+                                <TextBlock
+                                        FontSize="15"
+                                    Foreground="#FF717171"
+                                        FontFamily="Sylfaen"
+                                        Text="{Binding   Path=Structure,   StringFormat= Комплектация: {0}}"/>
+                                <TextBlock>
+                                        <Hyperlink Click="MoreInfo">
+                                            <TextBlock Text="Подробнее" />
+                                        </Hyperlink>
+                                    </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Frame Grid.Row="1" x:Name="newFrame" NavigationUIVisibility="Hidden" >
+
+        </Frame>
+        <!--Подвал-->
+        <Border CornerRadius="10,10,5,0" Background="#FF007AFF" Grid.Row="2"/>
+        <Grid Grid.Row="2" >
+            <Grid.Background>
+                <ImageBrush ImageSource="/design/patern1.png"/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- 3.1 Копирайт -->
+            <TextBlock Grid.Column="0"
+                       Text="©LINGERIE"
+                       FontSize="20"
+                       FontFamily="Javanese Text"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"
+                       Foreground="White"
+                       Height="35">
+            </TextBlock>
+            <!-- 3.2 Почта -->
+            <Button Grid.Column="1"
+                    Style="{StaticResource Message}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,0"/>
+        </Grid>
+    </Grid>
+</Window>

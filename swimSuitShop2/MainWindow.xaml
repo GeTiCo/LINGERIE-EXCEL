@@ -1,0 +1,109 @@
+﻿<Window x:Class="swimSuitShop2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:swimSuitShop2"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        BorderThickness="0.3"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow"
+        Height="550"
+        Width="450"
+        ResizeMode="CanResize">
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,450,550" RadiusX="10" RadiusY="10"/>
+    </Window.Clip>
+    <Grid>
+        <!-- 0.0 Разделение основного экрана -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <!-- 1.0 Шапка -->
+        <Border CornerRadius="0,0,10,10" Background="#FF007AFF" Grid.Row="0">
+            <Grid Grid.Row="0" Style="{StaticResource headerGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <!-- Наполнение шапки -->
+                <!-- 1.1 Иконка -->
+                <Image Grid.Column="0"
+                   Margin="12"
+                   Source="/res/LogoSwim1.png"/>
+                <!-- 1.2 Заголовок -->
+                <TextBlock Grid.Column="1"
+                       Text="LINGERIE"
+                       Style="{StaticResource ETBStyle}"
+                       HorizontalAlignment="Center"
+                       FontSize="40"
+                       Foreground="White"
+                       Height="72"/>
+                <!-- 1.3 Выход -->
+                <Button Grid.Column="2" Style="{StaticResource Exit}" Click="ExitClick"/>
+            </Grid>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Color="blue" Opacity="0.3"/>
+            </Border.Effect>
+        </Border>
+        <!-- 2.0 Тело -->
+        <Grid Grid.Row="1" Style="{StaticResource mainback}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="65"/>
+            </Grid.RowDefinitions>
+            <!-- Наполнение тела -->
+            <!-- 2.1 Каталог -->
+            <Button Grid.Row="1"
+                    Margin="40, 5"
+                    Content="Каталог"
+                    Click="Button_Click"
+                    Style="{StaticResource btnStyle}"/>
+            <!-- 2.2 Оформить заказ -->
+            <Button Grid.Row="2"
+                    Margin="40, 5"
+                    Content="Оформить заказ"
+                    Click="Button_Click_1"
+                    Style="{StaticResource btnStyle}"/>
+            <!-- 2.3 Редактировать -->
+                <Button Grid.Row="3"
+                    Margin="40, 5"
+                    Content="Редактировать"
+                    Click="Button_Click_2"
+                    Style="{StaticResource btnStyle}"/>
+        </Grid>
+        <!-- 3.0 Подвал -->
+        <Border CornerRadius="10,10,5,0" Background="#FF007AFF" Grid.Row="2">
+            <Grid Grid.Row="2" Style="{StaticResource foterGrid}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Наполнение подвала -->
+                <!-- 3.1 Копирайт -->
+                <TextBlock Grid.Column="0"
+                       Text="©LINGERIE"
+                       FontSize="20"
+                       Style="{StaticResource ETBStyle}"
+                       Margin="10,0,0,0"
+                       Foreground="White"
+                       Height="35">
+                </TextBlock>
+                <!-- 3.2 Почта -->
+                <Button Grid.Column="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,0"
+                    Style="{StaticResource Message}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
